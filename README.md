@@ -47,6 +47,10 @@ These are defined in `.env.example` and read on the server.
 - `pnpm lint` - run Biome checks
 - `pnpm format` - format with Biome
 
+## Testing
+
+Run tests: `pnpm test`
+
 ## Notes
 - The app route is `/dashboard`.
 - CoinGecko ETH price is cached for 60 seconds.
