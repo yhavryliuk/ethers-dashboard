@@ -11,10 +11,12 @@ import {
 
 export type PnLHeaderProps = Omit<PnLDurationPickerProps, "durations"> & {
   isPositive: boolean;
+  onClickExport: () => void;
 };
 
 export const PnLHeader: React.FC<PnLHeaderProps> = ({
   isPositive,
+  onClickExport,
   ...pickerProps
 }) => {
   return (
@@ -31,7 +33,13 @@ export const PnLHeader: React.FC<PnLHeaderProps> = ({
           <span className="text-sm leading-4.5">Profit/Loss</span>
         </div>
         <div>
-          <LoadOut size={IconSize.Small} />
+          <button
+            type="button"
+            className="cursor-pointer"
+            onClick={onClickExport}
+          >
+            <LoadOut size={IconSize.Small} />
+          </button>
         </div>
       </div>
       <div>

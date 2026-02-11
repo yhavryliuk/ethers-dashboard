@@ -55,12 +55,17 @@ export const PnLCard: React.FC<PnLCardProps> = ({
     [selectedDuration, loading],
   );
 
+  const handleExport = useCallback(() => {
+    alert("Export some data?");
+  }, []);
+
   return (
     <div className="flex flex-col gap-1.25">
       <PnLHeader
         isPositive={isPositive}
         onSelectDuration={handleDurationChange}
         selectedDuration={selectedDuration}
+        onClickExport={handleExport}
       />
       <PnLCurrentValue
         durationName={selectedDuration.extendedLabel}

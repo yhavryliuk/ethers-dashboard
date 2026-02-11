@@ -59,9 +59,9 @@ export const PnLDurationPicker: React.FC<PnLDurationPickerProps> = ({
           <Reorder.Item
             key={duration.value}
             value={duration}
-            whileDrag={{ scale: 1.1 }}
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.2}
+            whileDrag={{ scale: 1.05 }}
+            dragElastic={0.9}
+            dragMomentum={false}
           >
             <motion.button
               layout
