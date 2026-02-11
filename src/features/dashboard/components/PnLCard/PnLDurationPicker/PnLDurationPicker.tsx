@@ -3,7 +3,7 @@
 import clsx from "clsx";
 import { AnimatePresence, motion, Reorder } from "framer-motion";
 import type React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Duration } from "@/shared/constants";
 
 const LOCAL_STORAGE_KEY = "pnlDurationOrder";
@@ -20,6 +20,7 @@ export const PnLDurationPicker: React.FC<PnLDurationPickerProps> = ({
   onSelectDuration,
 }) => {
   const [order, setOrder] = useState<Duration[]>([]);
+  const isDraggingRef = useRef(false);
 
   useEffect(() => {
     const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -62,11 +63,24 @@ export const PnLDurationPicker: React.FC<PnLDurationPickerProps> = ({
             whileDrag={{ scale: 1.05 }}
             dragElastic={0.9}
             dragMomentum={false}
+            onDragStart={() => {
+              isDraggingRef.current = true;
+            }}
+            onDragEnd={() => {
+              setTimeout(() => {
+                isDraggingRef.current = false;
+              }, 0);
+            }}
           >
             <motion.button
               layout
               type="button"
-              onClick={() => onSelectDuration(duration)}
+              onClick={() => {
+                if (isDraggingRef.current) {
+                  return;
+                }
+                onSelectDuration(duration);
+              }}
               className={clsx(
                 "relative py-[4.5px] rounded-[70px] outline-none transition-colors duration-300",
                 isActive
